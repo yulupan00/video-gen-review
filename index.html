@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Which continuation is the best play?</title>
+<style>
+:root{
+  --paper:#F1F4F4; --surface:#fff; --ink:#14191a; --muted:#58696c; --rule:#c9d6d7; --rule-soft:#e1eaea;
+  --accent:#0d5c6b; --accent-wash:#dcedef; --video:#0a0e0f; --pick:#1d6fa5; --pick-wash:#dbeaf5; --warn:#a93b2c;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#0e1416; --surface:#151d1f; --ink:#e3ecec; --muted:#93a7aa; --rule:#263336; --rule-soft:#1c2628;
+  --accent:#5dbece; --accent-wash:#13333a; --video:#000; --pick:#6fb6e4; --pick-wash:#12293a; --warn:#e88b79;
+}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:min(2200px,98vw);margin:0 auto;padding:1rem 1rem 4rem;display:flex;flex-direction:column;gap:.9rem}
+header{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:.6rem}
+h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
+.meta{font:500 .78rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);letter-spacing:.03em}
+.who{display:flex;align-items:center;gap:.5rem;font-size:.86rem}
+.who input{width:11rem}
+.who.missing input{border-color:var(--warn);box-shadow:0 0 0 2px color-mix(in srgb,var(--warn) 30%,transparent)}
+.bar{height:5px;background:var(--rule-soft);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start}
+.side{position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow:auto;display:flex;flex-direction:column;gap:.7rem;padding-right:.2rem}
+@media (max-width:1100px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+@media (max-width:800px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--rule-soft);border-radius:5px;padding:.45rem;display:flex;flex-direction:column;gap:.4rem;min-width:0;border-left:5px solid var(--rule-soft)}
+.card.best{border-left-color:var(--pick);outline:2px solid var(--pick);outline-offset:1px}
+.card .top{display:flex;align-items:center;gap:.5rem}
+.badge{width:1.8rem;height:1.8rem;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);font:700 .9rem/1 ui-monospace,monospace}
+.card.best .badge{background:var(--pick)}
+video{width:100%;display:block;background:var(--video);border-radius:3px}
+button{font:inherit;cursor:pointer;border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:3px;padding:.42rem .85rem}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.45;cursor:not-allowed}
+.pickbtn{width:100%;font-weight:600}
+.pickbtn[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
+fieldset{border:1px solid var(--rule-soft);background:var(--surface);border-radius:4px;margin:0;padding:.75rem .9rem}
+legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);padding:0 .3rem}
+.first{width:100%;border-radius:3px;display:block;background:var(--video)}
+.task p{margin:.45rem 0 0;font-size:.88rem}
+.task p.key{font-weight:600}
+.bestrow{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
+.bestrow button{font:700 1rem/1 ui-monospace,monospace;padding:.6rem 0}
+.bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
+textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
+textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
+.nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
+.nav button{padding:.38rem .6rem;font-size:.86rem}
+.nav .spacer{flex:1}
+.pill{font:500 .75rem/1 ui-monospace,monospace;padding:.3rem .55rem;border-radius:999px;background:var(--accent-wash);color:var(--accent)}
+.status{font-size:.8rem;color:var(--muted);min-height:1.2em}
+.status.warn{color:var(--warn)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(3rem,1fr));gap:.25rem}
+.grid button{padding:.3rem 0;font:500 .72rem/1 ui-monospace,monospace}
+.grid button.done{background:var(--accent-wash);border-color:transparent;color:var(--accent)}
+.grid button.cur{outline:2px solid var(--accent);outline-offset:1px}
+details{background:var(--surface);border:1px solid var(--rule-soft);border-radius:4px;padding:.55rem .9rem}
+summary{cursor:pointer;font-size:.88rem;color:var(--muted)}
+.hint{font-size:.82rem;color:var(--muted);margin:.4rem 0 0}
+kbd{font:600 .74rem/1 ui-monospace,monospace;border:1px solid var(--rule);border-bottom-width:2px;border-radius:3px;padding:.1rem .3rem;background:var(--paper)}
+.intro{background:var(--surface);border-left:5px solid var(--accent);padding:.6rem .9rem;border-radius:4px;font-size:.9rem}
+.intro p{margin:.2rem 0}
+button.primary{background:var(--pick);color:#fff;border-color:transparent;font-weight:600}
+.status.ok{color:var(--pick)}
+</style></head><body>
+<div class="wrap">
+<header>
+  <div><h1>Which continuation is the best play?</h1><div class="meta" id="sub">loading…</div></div>
+  <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
+  <div class="meta" id="count"></div>
+</header>
+<div class="bar"><i id="prog"></i></div>
+<div class="intro">
+  <p><b>Thank you for helping.</b> Each page shows one moment from a soccer match and four short clips of how the play could continue from it. Pick the continuation that is the best play. There are <span id="ntotal">97</span> situations; it takes about 45 minutes and you can stop and come back any time in this browser.</p>
+  <p>Type your name, pick A–D on every situation, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
+</div>
+
+<div class="layout">
+<div class="main"><div class="cards" id="cards"></div></div>
+
+<aside class="side">
+<fieldset class="task">
+  <legend>The situation</legend>
+  <img class="first" id="first" alt="the moment all four clips start from">
+  <p class="key">All four clips continue from this moment. Which one is the best way to play it?</p>
+  <p>Pick the continuation whose <b>plan</b> is most likely to create a good scoring chance in a real match from here:
+     where the ball goes, who gets involved, how the defence is handled, when the shot comes.</p>
+  <p>Judge the play, not the picture. Ignore blur, odd ball flight or small glitches unless they stop you from reading
+     what the players are trying to do.</p>
+  <p>Pick one even when it is close; use the note for doubts.</p>
+</fieldset>
+
+<fieldset>
+  <legend>Best play</legend>
+  <div class="bestrow" id="best"></div>
+  <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
+</fieldset>
+
+<div class="nav">
+  <button id="prev">&larr; Previous</button>
+  <button id="next">Next &rarr;</button>
+  <button id="skip">Next unjudged</button>
+  <button id="replay">Replay all</button>
+  <span class="spacer"></span>
+  <span class="pill" id="saved">…</span>
+</div>
+
+<fieldset>
+  <legend>When you are done</legend>
+  <div class="nav"><button id="submit" class="primary">Submit my answers</button><button id="json">Download my answers</button></div>
+  <p class="hint">Your picks are kept in this browser under your name. Submit sends them to us; you can submit again later and the
+     latest copy counts. If submitting fails, download the file and email it instead.</p>
+</fieldset>
+<div class="status" id="status"></div>
+<div class="grid" id="grid"></div>
+<details><summary>Keys</summary>
+  <p class="hint"><kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> (or <kbd>1</kbd>–<kbd>4</kbd>) pick the best play ·
+     <kbd>Space</kbd> replay all four · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
+     Keys are off while you type in the note. The four clips play together and loop.</p>
+</details>
+</aside>
+</div>
+</div>
+<script>
+// Static copy of the strategy-choice page: no server. Picks live in this browser (localStorage, one record per name)
+// and are sent as ONE submission per press of "Submit" to the endpoint below (Formspree form, JSON over fetch).
+const SUBMIT_URL = "https://formspree.io/f/REPLACE_ME";
+const LETTERS = ["A", "B", "C", "D"];
+let M = null, R = {}, i = 0, dirty = false, autoSent = false;
+const $ = s => document.querySelector(s);
+const el = (t, a = {}, kids = []) => { const n = document.createElement(t);
+  for (const [k, v] of Object.entries(a)) k === "class" ? n.className = v : n.setAttribute(k, v);
+  for (const c of [].concat(kids)) n.append(c); return n; };
+
+const rater = () => ($("#rater").value || "").trim();
+const LS = () => "strategy_choice_public::" + rater();
+function cur(){ return M.items[i]; }
+function rec(){ const k = cur().id; return R[k] || (R[k] = { best: null, note: "" }); }
+function done(sid){ const r = R[sid]; return !!(r && r.best); }
+function nDone(){ return M.items.filter(x => done(x.id)).length; }
+function status(t, warn){ $("#status").textContent = t; $("#status").classList.toggle("warn", !!warn); $("#status").classList.toggle("ok", warn === false); }
+
+function load(){ try { R = JSON.parse(localStorage.getItem(LS()) || "{}"); } catch (e) { R = {}; } }
+function save(){
+  if (!rater()) return;
+  try { localStorage.setItem(LS(), JSON.stringify(R)); $("#saved").textContent = `kept ${nDone()}/${M.items.length}`; dirty = false; }
+  catch (e) { $("#saved").textContent = "cannot save in this browser"; }
+}
+function needName(){
+  if (rater()) return false;
+  $("#who").classList.add("missing"); $("#rater").focus();
+  status("Type your name first, so the picks are filed under it.", true);
+  return true;
+}
+function setBest(L){
+  if (needName()) return;
+  const r = rec(); r.best = (r.best === L) ? null : L; r.at = new Date().toISOString();
+  draw(); save();
+  if (r.best && nDone() === M.items.length && !autoSent){ autoSent = true; submit(); }
+}
+
+function answers(){
+  return { name: rater(), built: M.built, n_done: nDone(), n_total: M.items.length, submitted_at: new Date().toISOString(),
+           picks: M.items.filter(it => done(it.id)).map(it => ({ situation: it.id, best: R[it.id].best, note: R[it.id].note || "", at: R[it.id].at || "" })) };
+}
+async function submit(){
+  if (needName()) return;
+  const a = answers();
+  if (!a.n_done){ status("Nothing to submit yet.", true); return; }
+  if (SUBMIT_URL.includes("REPLACE_ME")){ status("Submitting is not set up on this copy. Please download your answers and email the file.", true); return; }
+  $("#submit").disabled = true; status("Sending…");
+  try {
+    const res = await fetch(SUBMIT_URL, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify({ name: a.name, n_done: a.n_done, n_total: a.n_total, submitted_at: a.submitted_at, built: a.built,
+                             picks: JSON.stringify(a.picks), _subject: `strategy study: ${a.name} ${a.n_done}/${a.n_total}` }) });
+    const j = await res.json().catch(() => ({}));
+    if (res.ok && j.ok !== false){
+      status(`Submitted ${a.n_done} of ${a.n_total} picks as ${a.name}. Thank you!`, false);
+      try { localStorage.setItem(LS() + "::submitted", a.submitted_at); } catch (e) {}
+    } else {
+      const why = j.errors ? j.errors.map(e => e.message).join("; ") : `HTTP ${res.status}`;
+      status(`Submitting failed (${why}). Please download your answers and email the file.`, true);
+    }
+  } catch (e) { status("Submitting failed (no connection?). Please download your answers and email the file.", true); }
+  $("#submit").disabled = false;
+}
+
+function buildCards(){
+  const host = $("#cards"); host.textContent = "";
+  cur().videos.forEach(v => {
+    const card = el("div", { class: "card", "data-l": v.letter });
+    const vid = el("video", { muted: "", loop: "", playsinline: "", preload: "auto", controls: "" });
+    vid.muted = true; vid.defaultMuted = true; vid.autoplay = true; vid.src = v.src;
+    const b = el("button", { class: "pickbtn", "data-l": v.letter }, [`${v.letter} is the best play`]);
+    b.onclick = () => setBest(v.letter);
+    card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])]), vid, b);
+    host.append(card);
+  });
+  playAll();
+}
+let armed = false;
+function playAll(){
+  for (const v of document.querySelectorAll("#cards video")){
+    v.currentTime = 0;
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {
+      if (armed) return; armed = true;
+      status("Click anywhere (or press a key) to start the clips.");
+      const kick = () => { armed = false; status(""); playAll(); };
+      for (const ev of ["pointerdown", "keydown", "touchstart"]) document.addEventListener(ev, kick, { once: true, capture: true });
+    });
+  }
+}
+document.addEventListener("visibilitychange", () => { if (!document.hidden) for (const v of document.querySelectorAll("#cards video")) v.play().catch(()=>{}); });
+
+function draw(){
+  const it = cur(), r = R[it.id] || { best: null, note: "" };
+  $("#sub").textContent = `situation ${i + 1}`;
+  $("#count").textContent = `${i + 1} / ${M.items.length}`;
+  const nd = nDone();
+  $("#prog").style.width = (100 * nd / M.items.length) + "%";
+  $("#saved").textContent = rater() ? `kept ${nd}/${M.items.length}` : "name needed";
+  $("#first").src = it.first;
+  document.querySelectorAll("#cards .card").forEach(card => {
+    const L = card.dataset.l; card.classList.toggle("best", r.best === L);
+    card.querySelector(".pickbtn").setAttribute("aria-pressed", String(r.best === L));
+  });
+  document.querySelectorAll("#best button").forEach(b => b.setAttribute("aria-pressed", String(r.best === b.dataset.l)));
+  if (document.activeElement !== $("#note")) $("#note").value = r.note || "";
+  for (const [sid, b] of Object.entries(gridBtns)){ b.classList.toggle("done", done(sid)); b.classList.toggle("cur", sid === it.id); }
+}
+
+let gridBtns = {};
+function buildGrid(){
+  const host = $("#grid"); host.textContent = ""; gridBtns = {};
+  M.items.forEach((it, n) => {
+    const b = el("button", { title: `situation ${n + 1}` }, [String(n + 1)]);
+    b.onclick = () => { if (dirty) save(); i = n; buildCards(); draw(); };
+    gridBtns[it.id] = b; host.append(b);
+  });
+}
+function go(d){
+  const n = Math.min(M.items.length - 1, Math.max(0, i + d));
+  if (n === i) return;
+  if (dirty) save();
+  i = n; buildCards(); draw();
+}
+function nextUnjudged(){
+  if (needName()) return;
+  for (let k = 1; k <= M.items.length; k++){
+    const n = (i + k) % M.items.length;
+    if (!done(M.items[n].id)){ if (dirty) save(); i = n; buildCards(); draw(); return; }
+  }
+  status("You have judged every situation. Press Submit my answers if you have not yet. Thank you!", false);
+}
+
+document.addEventListener("keydown", e => {
+  const t = e.target; if (t && (t.tagName === "TEXTAREA" || t.tagName === "INPUT")) return;
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  const k = e.key.toLowerCase();
+  if (LETTERS.map(x => x.toLowerCase()).includes(k)) { e.preventDefault(); setBest(k.toUpperCase()); return; }
+  if ("1234".includes(k) && k) { e.preventDefault(); setBest(LETTERS[Number(k) - 1]); return; }
+  if (k === " ") { e.preventDefault(); playAll(); return; }
+  if (k === "arrowright") { e.preventDefault(); go(1); return; }
+  if (k === "arrowleft") { e.preventDefault(); go(-1); return; }
+  if (k === "s") { e.preventDefault(); nextUnjudged(); }
+});
+
+function download(name, text, type){
+  const a = el("a", { href: URL.createObjectURL(new Blob([text], { type })), download: name });
+  document.body.append(a); a.click(); a.remove();
+}
+
+(async function init(){
+  M = await (await fetch("manifest.json")).json();
+  $("#ntotal").textContent = M.items.length;
+  try { $("#rater").value = localStorage.getItem("strategy_choice_public_rater") || ""; } catch (e) {}
+  load();
+  const bestHost = $("#best");
+  for (const L of LETTERS){ const b = el("button", { "data-l": L, title: `${L} is the best play` }, [L]); b.onclick = () => setBest(L); bestHost.append(b); }
+  buildGrid();
+  $("#rater").oninput = () => { try { localStorage.setItem("strategy_choice_public_rater", rater()); } catch (e) {}
+    load(); if (rater()) { $("#who").classList.remove("missing"); status(""); } draw(); };
+  $("#prev").onclick = () => go(-1);
+  $("#next").onclick = () => go(1);
+  $("#skip").onclick = nextUnjudged;
+  $("#replay").onclick = playAll;
+  $("#submit").onclick = submit;
+  $("#json").onclick = () => { if (needName()) return; download(`strategy_choice_${rater()}.json`, JSON.stringify(answers(), null, 1), "application/json"); };
+  $("#note").oninput = () => { if (needName()) return; rec().note = $("#note").value; dirty = true; };
+  $("#note").onblur = () => { if (dirty) save(); };
+  window.addEventListener("beforeunload", () => { if (dirty) save(); });
+  const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
+  i = first < 0 ? 0 : first;
+  buildCards(); draw();
+  if (!rater()) needName(); else status(`${M.items.length} situations · 4 continuations each, same starting moment`);
+})();
+</script></body></html>
