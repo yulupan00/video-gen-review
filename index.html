@@ -84,10 +84,6 @@ body.mode-public .wrap .tabs{display:flex}
   <div class="meta" id="count"></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
-<div class="intro">
-  <p><b>Thank you for helping.</b> Each page shows one moment from a soccer match and two short clips of how the play could continue from it. Both clips stop as the shot is taken, so you never see whether it went in. Pick the continuation that is the better play, or <b>No preference</b> if you cannot separate them. There are <span id="ntotal">?</span> situations; it takes about 30 minutes and you can stop and come back any time in this browser.</p>
-  <p class="public">Type your name, answer every situation, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
-</div>
 
 <div class="layout">
 <div class="main"><div class="cards " id="cards"></div></div>
@@ -96,7 +92,7 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="task">
   <legend>The situation</legend>
   <img class="first" id="first" alt="the moment both clips start from">
-  <p class="key">Both clips continue from this moment and end as the shot is taken. Which is the better way to play it?</p><p>Pick the continuation whose <b>plan</b> is more likely to create a good scoring chance in a real match from here: where the ball goes, who gets involved, how the defence is handled, when the shot comes.</p><p>Judge the play, not the picture. Ignore blur, odd ball flight or small glitches unless they stop you from reading what the players are trying to do. Clip length does not matter; one play may reach the shot sooner than the other.</p><p>Choose <b>No preference</b> only when the two plans really are equally good; use the note for doubts.</p>
+  <p class="key">Which continuation is the better play?</p>
 </fieldset>
 
 <fieldset>
@@ -117,16 +113,12 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="public">
   <legend>When you are done</legend>
   <div class="nav"><button id="submit" class="primary">Submit my answers</button><button id="json">Download my answers</button></div>
-  <p class="hint">Your answers are kept in this browser under your name. Submit sends them to us; you can submit again later and the
-     latest copy counts. If submitting fails, download the file and email it instead.</p>
 </fieldset>
 <div class="nav server"><button id="csv">Download CSV</button></div>
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) the better play · <kbd>N</kbd> or <kbd>0</kbd> no preference ·
-     <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
-     Keys are off while you type in the note. The clips loop.</p>
+  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) the better play · <kbd>N</kbd> or <kbd>0</kbd> no preference · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
 </details>
 </aside>
 </div>
@@ -188,7 +180,7 @@ async function poll(){
 function needName(){
   if (rater()) return false;
   $("#who").classList.add("missing"); $("#rater").focus();
-  status("Type your name first, so the answers are filed under it.", true);
+  status("Type your name first.", true);
   return true;
 }
 function setBest(L){
@@ -319,7 +311,6 @@ function csv(){
 
 (async function init(){
   M = await (await fetch("manifest.json")).json();
-  $("#ntotal").textContent = M.items.length;
   try { $("#rater").value = localStorage.getItem("video_gen_review_rater") || ""; } catch (e) {}
   load();
   const bestHost = $("#best");
@@ -344,6 +335,6 @@ function csv(){
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
   buildCards(); draw();
-  if (!rater()) needName(); else status(`${M.items.length} situations · 2 continuations each, same starting moment, both end at the shot`);
+  if (!rater()) needName();
 })();
 </script></body></html>

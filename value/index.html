@@ -84,10 +84,6 @@ body.mode-public .wrap .tabs{display:flex}
   <div class="meta" id="count"></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
-<div class="intro">
-  <p><b>Thank you for helping.</b> Each page shows two short clips from different soccer plays. Each clip stops at the moment the shot is released. Say which of the two shots is more likely to score, or whether they are comparable. There are <span id="ntotal">?</span> pairs; it takes about 15 minutes and you can stop and come back any time in this browser.</p>
-  <p class="public">Type your name, answer every pair, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
-</div>
 
 <div class="layout">
 <div class="main"><div class="cards " id="cards"></div></div>
@@ -96,7 +92,7 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="task">
   <legend>The question</legend>
   
-  <p class="key">Each clip ends as the shot is released. Which shot has the higher scoring probability?</p><p>Judge the shot the player is about to take at the last frame: distance and angle to goal, how many defenders are between the ball and the goal, where the keeper is, how the ball arrived (first-time strike, header, after a dribble), the shooter's balance. The two clips are from different matches; compare the chance of scoring, not the plays.</p><p><b>Comparable</b>: about the same chance. <b>Cannot judge</b>: a clip does not let you see the shot.</p>
+  <p class="key">Which shot has the higher scoring probability?</p>
 </fieldset>
 
 <fieldset>
@@ -117,16 +113,12 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="public">
   <legend>When you are done</legend>
   <div class="nav"><button id="submit" class="primary">Submit my answers</button><button id="json">Download my answers</button></div>
-  <p class="hint">Your answers are kept in this browser under your name. Submit sends them to us; you can submit again later and the
-     latest copy counts. If submitting fails, download the file and email it instead.</p>
 </fieldset>
 <div class="nav server"><button id="csv">Download CSV</button></div>
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) more likely to score · <kbd>C</kbd> or <kbd>3</kbd> comparable · <kbd>4</kbd> or <kbd>0</kbd> cannot judge ·
-     <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
-     Keys are off while you type in the note. The clips loop.</p>
+  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) more likely to score · <kbd>C</kbd> or <kbd>3</kbd> comparable · <kbd>4</kbd> or <kbd>0</kbd> cannot judge · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
 </details>
 </aside>
 </div>
@@ -188,7 +180,7 @@ async function poll(){
 function needName(){
   if (rater()) return false;
   $("#who").classList.add("missing"); $("#rater").focus();
-  status("Type your name first, so the answers are filed under it.", true);
+  status("Type your name first.", true);
   return true;
 }
 function setBest(L){
@@ -319,7 +311,6 @@ function csv(){
 
 (async function init(){
   M = await (await fetch("manifest.json")).json();
-  $("#ntotal").textContent = M.items.length;
   try { $("#rater").value = localStorage.getItem("video_gen_review_rater") || ""; } catch (e) {}
   load();
   const bestHost = $("#best");
@@ -344,6 +335,6 @@ function csv(){
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
   buildCards(); draw();
-  if (!rater()) needName(); else status(`${M.items.length} pairs · two shots each, both stopped at the release`);
+  if (!rater()) needName();
 })();
 </script></body></html>

@@ -84,10 +84,6 @@ body.mode-public .wrap .tabs{display:flex}
   <div class="meta" id="count"></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
-<div class="intro">
-  <p><b>Thank you for helping.</b> Each page shows one short clip of a soccer play, which stops as the shot is taken. Say whether this sequence of player and ball movements could plausibly occur in a competitive game. There are <span id="ntotal">?</span> clips; it takes about 20 minutes and you can stop and come back any time in this browser.</p>
-  <p class="public">Type your name, answer every clip, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
-</div>
 
 <div class="layout">
 <div class="main"><div class="cards one" id="cards"></div></div>
@@ -96,7 +92,7 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="task">
   <legend>The question</legend>
   
-  <p class="key">Could this sequence of player and ball movements plausibly occur in a competitive game?</p><p>Think about the behaviour on the pitch: how the players move and react, how the ball travels when it is passed, dribbled or struck, whether the defenders and the keeper do what defenders and keepers do.</p><p><b>Plausible</b>: this could happen in a real match. <b>Difficult but plausible</b>: unusual or hard to pull off, but possible. <b>Implausible</b>: this could not happen; something moves in a way players or a ball do not. <b>Cannot judge</b>: the clip does not let you tell.</p><p>Picture quality (blur, resolution, broadcast graphics) is not the question; the movements are.</p>
+  <p class="key">Could this sequence of player and ball movements plausibly occur in a competitive game?</p>
 </fieldset>
 
 <fieldset>
@@ -117,16 +113,12 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="public">
   <legend>When you are done</legend>
   <div class="nav"><button id="submit" class="primary">Submit my answers</button><button id="json">Download my answers</button></div>
-  <p class="hint">Your answers are kept in this browser under your name. Submit sends them to us; you can submit again later and the
-     latest copy counts. If submitting fails, download the file and email it instead.</p>
 </fieldset>
 <div class="nav server"><button id="csv">Download CSV</button></div>
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>1</kbd> plausible · <kbd>2</kbd> difficult but plausible · <kbd>3</kbd> implausible · <kbd>4</kbd> cannot judge ·
-     <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
-     Keys are off while you type in the note. The clips loop.</p>
+  <p class="hint"><kbd>1</kbd> plausible · <kbd>2</kbd> difficult but plausible · <kbd>3</kbd> implausible · <kbd>4</kbd> cannot judge · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
 </details>
 </aside>
 </div>
@@ -188,7 +180,7 @@ async function poll(){
 function needName(){
   if (rater()) return false;
   $("#who").classList.add("missing"); $("#rater").focus();
-  status("Type your name first, so the answers are filed under it.", true);
+  status("Type your name first.", true);
   return true;
 }
 function setBest(L){
@@ -319,7 +311,6 @@ function csv(){
 
 (async function init(){
   M = await (await fetch("manifest.json")).json();
-  $("#ntotal").textContent = M.items.length;
   try { $("#rater").value = localStorage.getItem("video_gen_review_rater") || ""; } catch (e) {}
   load();
   const bestHost = $("#best");
@@ -344,6 +335,6 @@ function csv(){
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
   buildCards(); draw();
-  if (!rater()) needName(); else status(`${M.items.length} clips · one clip each, ending as the shot is taken`);
+  if (!rater()) needName();
 })();
 </script></body></html>
