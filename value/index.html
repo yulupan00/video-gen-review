@@ -32,6 +32,8 @@ h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 @media (max-width:800px){.cards{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--rule-soft);border-radius:5px;padding:.45rem;display:flex;flex-direction:column;gap:.4rem;min-width:0;border-left:5px solid var(--rule-soft)}
 .card.best{border-left-color:var(--pick);outline:2px solid var(--pick);outline-offset:1px}
+.card.playing .badge{background:var(--accent);box-shadow:0 0 0 3px var(--accent-wash)}
+.card.playing{border-left-color:var(--accent)}
 .card .top{display:flex;align-items:center;gap:.5rem}
 .badge{width:1.8rem;height:1.8rem;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);font:700 .9rem/1 ui-monospace,monospace}
 .card.best .badge{background:var(--pick)}
@@ -107,7 +109,7 @@ body.mode-public .wrap .tabs{display:flex}
   <button id="prev">&larr; Previous</button>
   <button id="next">Next &rarr;</button>
   <button id="skip">Next unjudged</button>
-  <button id="replay">Replay both</button>
+  <button id="replay">Play again</button>
   <span class="spacer"></span>
   <span class="pill" id="saved">…</span>
 </div>
@@ -120,7 +122,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) more likely to score · <kbd>C</kbd> or <kbd>3</kbd> comparable · <kbd>4</kbd> or <kbd>0</kbd> cannot judge · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
+  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) more likely to score · <kbd>C</kbd> or <kbd>3</kbd> comparable · <kbd>4</kbd> or <kbd>0</kbd> cannot judge · <kbd>Space</kbd> play again · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
 </details>
 </aside>
 </div>
@@ -222,8 +224,8 @@ function buildCards(){
   const host = $("#cards"); host.textContent = "";
   cur().videos.forEach(v => {
     const card = el("div", { class: "card", "data-l": v.letter });
-    const vid = el("video", { muted: "", loop: "", playsinline: "", preload: "auto", controls: "" });
-    vid.muted = true; vid.defaultMuted = true; vid.autoplay = true; vid.src = v.src;
+    const vid = el("video", { muted: "", playsinline: "", preload: "auto", controls: "" });
+    vid.muted = true; vid.defaultMuted = true; vid.src = v.src;
     if (v.letter) card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])]));
     card.append(vid);
     if (CARD_BTN && v.letter && OPTIONS.some(o => o[0] === v.letter)){
@@ -234,10 +236,18 @@ function buildCards(){
   });
   playAll();
 }
-let armed = false;
+// Playback (user's feedback 2026-11-03): the clips play ONE AFTER THE OTHER, each once, and stop on their last frame; the
+// card that is playing is marked; "Play again" / Space restarts the sequence. The native controls still play a single clip.
+let armed = false, seqId = 0;
 function playAll(){
-  for (const v of document.querySelectorAll("#cards video")){
-    v.currentTime = 0;
+  const vids = [...document.querySelectorAll("#cards video")]; const my = ++seqId;
+  vids.forEach(v => { v.pause(); v.onended = null; v.currentTime = 0; });
+  const mark = k => document.querySelectorAll("#cards .card").forEach((c, j) => c.classList.toggle("playing", j === k));
+  const step = k => {
+    if (my !== seqId) return;
+    mark(k);
+    if (k >= vids.length) return;
+    const v = vids[k]; v.onended = () => step(k + 1);
     const p = v.play();
     if (p && p.catch) p.catch(() => {
       if (armed) return; armed = true;
@@ -245,9 +255,9 @@ function playAll(){
       const kick = () => { armed = false; status(""); playAll(); };
       for (const ev of ["pointerdown", "keydown", "touchstart"]) document.addEventListener(ev, kick, { once: true, capture: true });
     });
-  }
+  };
+  step(0);
 }
-document.addEventListener("visibilitychange", () => { if (!document.hidden) for (const v of document.querySelectorAll("#cards video")) v.play().catch(()=>{}); });
 
 function draw(){
   const it = cur(), r = R[key(it.id)] || { best: null, note: "" };
