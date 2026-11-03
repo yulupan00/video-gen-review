@@ -39,6 +39,7 @@ h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .card .top{display:flex;align-items:center;gap:.5rem}
 .badge{width:1.8rem;height:1.8rem;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--ink);color:var(--paper);font:700 .9rem/1 ui-monospace,monospace}
 .card.best .badge{background:var(--pick)}
+.vlabel{font:600 .8rem/1 ui-monospace,monospace;color:var(--muted);letter-spacing:.03em}
 video{width:100%;display:block;background:var(--video);border-radius:3px}
 button{font:inherit;cursor:pointer;border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:3px;padding:.42rem .85rem}
 button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -232,7 +233,7 @@ function buildCards(){
     const card = el("div", { class: "card", "data-l": v.letter });
     const vid = el("video", { muted: "", playsinline: "", preload: "auto", controls: "" });
     vid.muted = true; vid.defaultMuted = true; vid.src = v.src;
-    if (v.letter) card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])]));
+    if (v.letter) card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])].concat(v.label ? [el("span", { class: "vlabel" }, [v.label])] : [])));
     card.append(vid);
     host.append(card);
   });
