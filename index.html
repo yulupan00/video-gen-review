@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Which continuation is the best play?</title>
+<title>Which continuation is the better play?</title>
 <style>
 :root{
   --paper:#F1F4F4; --surface:#fff; --ink:#14191a; --muted:#58696c; --rule:#c9d6d7; --rule-soft:#e1eaea;
@@ -12,7 +12,7 @@
 }}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
-.wrap{max-width:min(2200px,98vw);margin:0 auto;padding:1rem 1rem 4rem;display:flex;flex-direction:column;gap:.9rem}
+.wrap{max-width:min(2000px,98vw);margin:0 auto;padding:1rem 1rem 4rem;display:flex;flex-direction:column;gap:.9rem}
 header{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:.6rem}
 h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .meta{font:500 .78rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);letter-spacing:.03em}
@@ -24,7 +24,7 @@ h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start}
 .side{position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow:auto;display:flex;flex-direction:column;gap:.7rem;padding-right:.2rem}
 @media (max-width:1100px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.8rem}
 @media (max-width:800px){.cards{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--rule-soft);border-radius:5px;padding:.45rem;display:flex;flex-direction:column;gap:.4rem;min-width:0;border-left:5px solid var(--rule-soft)}
 .card.best{border-left-color:var(--pick);outline:2px solid var(--pick);outline-offset:1px}
@@ -42,8 +42,8 @@ legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transf
 .first{width:100%;border-radius:3px;display:block;background:var(--video)}
 .task p{margin:.45rem 0 0;font-size:.88rem}
 .task p.key{font-weight:600}
-.bestrow{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
-.bestrow button{font:700 1rem/1 ui-monospace,monospace;padding:.6rem 0}
+.bestrow{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:.4rem}
+.bestrow button{font:700 .95rem/1.2 ui-monospace,monospace;padding:.6rem .2rem}
 .bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
 textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
@@ -53,6 +53,7 @@ textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
 .pill{font:500 .75rem/1 ui-monospace,monospace;padding:.3rem .55rem;border-radius:999px;background:var(--accent-wash);color:var(--accent)}
 .status{font-size:.8rem;color:var(--muted);min-height:1.2em}
 .status.warn{color:var(--warn)}
+.status.ok{color:var(--pick)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(3rem,1fr));gap:.25rem}
 .grid button{padding:.3rem 0;font:500 .72rem/1 ui-monospace,monospace}
 .grid button.done{background:var(--accent-wash);border-color:transparent;color:var(--accent)}
@@ -64,18 +65,20 @@ kbd{font:600 .74rem/1 ui-monospace,monospace;border:1px solid var(--rule);border
 .intro{background:var(--surface);border-left:5px solid var(--accent);padding:.6rem .9rem;border-radius:4px;font-size:.9rem}
 .intro p{margin:.2rem 0}
 button.primary{background:var(--pick);color:#fff;border-color:transparent;font-weight:600}
-.status.ok{color:var(--pick)}
+.public{display:none}
+body.public .public{display:block}
+body.public .server{display:none}
 </style></head><body>
 <div class="wrap">
 <header>
-  <div><h1>Which continuation is the best play?</h1><div class="meta" id="sub">loading…</div></div>
+  <div><h1>Which continuation is the better play?</h1><div class="meta" id="sub">loading…</div></div>
   <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
 <div class="intro">
-  <p><b>Thank you for helping.</b> Each page shows one moment from a soccer match and four short clips of how the play could continue from it. Pick the continuation that is the best play. There are <span id="ntotal">97</span> situations; it takes about 45 minutes and you can stop and come back any time in this browser.</p>
-  <p>Type your name, pick A–D on every situation, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
+  <p><b>Thank you for helping.</b> Each page shows one moment from a soccer match and two short clips of how the play could continue from it. Both clips stop as the shot is taken, so you never see whether it went in. Pick the continuation that is the better play, or <b>No preference</b> if you cannot separate them. There are <span id="ntotal">97</span> situations; it takes about 30 minutes and you can stop and come back any time in this browser.</p>
+  <p class="public">Type your name, answer every situation, then press <b>Submit my answers</b> at the bottom of the side panel.</p>
 </div>
 
 <div class="layout">
@@ -84,17 +87,17 @@ button.primary{background:var(--pick);color:#fff;border-color:transparent;font-w
 <aside class="side">
 <fieldset class="task">
   <legend>The situation</legend>
-  <img class="first" id="first" alt="the moment all four clips start from">
-  <p class="key">All four clips continue from this moment. Which one is the best way to play it?</p>
-  <p>Pick the continuation whose <b>plan</b> is most likely to create a good scoring chance in a real match from here:
+  <img class="first" id="first" alt="the moment both clips start from">
+  <p class="key">Both clips continue from this moment and end as the shot is taken. Which is the better way to play it?</p>
+  <p>Pick the continuation whose <b>plan</b> is more likely to create a good scoring chance in a real match from here:
      where the ball goes, who gets involved, how the defence is handled, when the shot comes.</p>
   <p>Judge the play, not the picture. Ignore blur, odd ball flight or small glitches unless they stop you from reading
-     what the players are trying to do.</p>
-  <p>Pick one even when it is close; use the note for doubts.</p>
+     what the players are trying to do. Clip length does not matter; one play may reach the shot sooner than the other.</p>
+  <p>Choose <b>No preference</b> only when the two plans really are equally good; use the note for doubts.</p>
 </fieldset>
 
 <fieldset>
-  <legend>Best play</legend>
+  <legend>Better play</legend>
   <div class="bestrow" id="best"></div>
   <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
 </fieldset>
@@ -103,68 +106,97 @@ button.primary{background:var(--pick);color:#fff;border-color:transparent;font-w
   <button id="prev">&larr; Previous</button>
   <button id="next">Next &rarr;</button>
   <button id="skip">Next unjudged</button>
-  <button id="replay">Replay all</button>
+  <button id="replay">Replay both</button>
   <span class="spacer"></span>
   <span class="pill" id="saved">…</span>
 </div>
 
-<fieldset>
+<fieldset class="public">
   <legend>When you are done</legend>
   <div class="nav"><button id="submit" class="primary">Submit my answers</button><button id="json">Download my answers</button></div>
-  <p class="hint">Your picks are kept in this browser under your name. Submit sends them to us; you can submit again later and the
+  <p class="hint">Your answers are kept in this browser under your name. Submit sends them to us; you can submit again later and the
      latest copy counts. If submitting fails, download the file and email it instead.</p>
 </fieldset>
+<div class="nav server"><button id="csv">Download CSV</button></div>
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>A</kbd> <kbd>B</kbd> <kbd>C</kbd> <kbd>D</kbd> (or <kbd>1</kbd>–<kbd>4</kbd>) pick the best play ·
-     <kbd>Space</kbd> replay all four · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
-     Keys are off while you type in the note. The four clips play together and loop.</p>
+  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) the better play · <kbd>N</kbd> or <kbd>0</kbd> no preference ·
+     <kbd>Space</kbd> replay both · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.
+     Keys are off while you type in the note. The two clips play together and loop.</p>
 </details>
 </aside>
 </div>
 </div>
 <script>
-// Static copy of the strategy-choice page: no server. Picks live in this browser (localStorage, one record per name)
-// and are sent as ONE submission per press of "Submit" to the endpoint below (Formspree form, JSON over fetch).
+// One page, two modes. SERVER = true: served by serve.py, every answer is POSTed to /save under the reviewer's name and the
+// page polls choices.json (several reviewers can share the server). SERVER = false (the public copy built by
+// build_public.py): no server; answers live in this browser (localStorage, one record per name) and are sent as ONE
+// submission per press of "Submit" to SUBMIT_URL (Formspree form, JSON over fetch), study field "pair_v2".
+const SERVER = false;
 const SUBMIT_URL = "https://formspree.io/f/xqppqrdq";
-const LETTERS = ["A", "B", "C", "D"];
+const STUDY = "pair_v2";
+const LETTERS = ["A", "B"]; const TIE = "tie";
 let M = null, R = {}, i = 0, dirty = false, autoSent = false;
 const $ = s => document.querySelector(s);
 const el = (t, a = {}, kids = []) => { const n = document.createElement(t);
   for (const [k, v] of Object.entries(a)) k === "class" ? n.className = v : n.setAttribute(k, v);
   for (const c of [].concat(kids)) n.append(c); return n; };
+if (!SERVER) document.body.classList.add("public");
 
 const rater = () => ($("#rater").value || "").trim();
-const LS = () => "strategy_choice_public::" + rater();
+const key = sid => SERVER ? `${rater()}::${sid}` : sid;
+const LS = () => "strategy_pair::" + rater();
 function cur(){ return M.items[i]; }
-function rec(){ const k = cur().id; return R[k] || (R[k] = { best: null, note: "" }); }
-function done(sid){ const r = R[sid]; return !!(r && r.best); }
+function rec(){ const k = key(cur().id); return R[k] || (R[k] = { best: null, note: "" }); }
+function done(sid){ const r = R[key(sid)]; return !!(r && r.best); }
 function nDone(){ return M.items.filter(x => done(x.id)).length; }
+function mine(){ if (!SERVER) return R; const p = rater() + "::"; return Object.fromEntries(Object.entries(R).filter(([k, v]) => k.startsWith(p) && v && v.best)); }
 function status(t, warn){ $("#status").textContent = t; $("#status").classList.toggle("warn", !!warn); $("#status").classList.toggle("ok", warn === false); }
 
-function load(){ try { R = JSON.parse(localStorage.getItem(LS()) || "{}"); } catch (e) { R = {}; } }
-function save(){
+function load(){ if (SERVER) return; try { R = JSON.parse(localStorage.getItem(LS()) || "{}"); } catch (e) { R = {}; } }
+async function save(){
   if (!rater()) return;
-  try { localStorage.setItem(LS(), JSON.stringify(R)); $("#saved").textContent = `kept ${nDone()}/${M.items.length}`; dirty = false; }
-  catch (e) { $("#saved").textContent = "cannot save in this browser"; }
+  if (!SERVER){
+    try { localStorage.setItem(LS(), JSON.stringify(R)); $("#saved").textContent = `kept ${nDone()}/${M.items.length}`; dirty = false; }
+    catch (e) { $("#saved").textContent = "cannot save in this browser"; }
+    return;
+  }
+  const payload = {}; for (const [k, v] of Object.entries(mine())) payload[k] = Object.assign({}, v, { by: rater(), situation: k.split("::")[1] });
+  try {
+    const res = await fetch("/save", { method: "POST", headers: {"Content-Type":"application/json"},
+      body: JSON.stringify({ built: M.built, saved_at: new Date().toISOString(), ratings: payload }) });
+    const j = await res.json();
+    if (j.ratings) adopt(j.ratings);
+    $("#saved").textContent = `saved ${nDone()}/${M.items.length}`; dirty = false;
+  } catch (e) { $("#saved").textContent = "saved locally only"; }
+  try { localStorage.setItem("strategy_pair_server", JSON.stringify(mine())); } catch (e) {}
+}
+function adopt(remote){
+  const keep = M ? key(cur().id) : null;
+  for (const [k, v] of Object.entries(remote)) if (k !== keep) R[k] = v;
+  if (M) draw();
+}
+async function poll(){
+  if (!SERVER) return;
+  try { const s = await (await fetch("choices.json", { cache: "no-store" })).json(); adopt(s.ratings || {}); } catch (e) {}
 }
 function needName(){
   if (rater()) return false;
   $("#who").classList.add("missing"); $("#rater").focus();
-  status("Type your name first, so the picks are filed under it.", true);
+  status("Type your name first, so the answers are filed under it.", true);
   return true;
 }
 function setBest(L){
   if (needName()) return;
   const r = rec(); r.best = (r.best === L) ? null : L; r.at = new Date().toISOString();
   draw(); save();
-  if (r.best && nDone() === M.items.length && !autoSent){ autoSent = true; submit(); }
+  if (!SERVER && r.best && nDone() === M.items.length && !autoSent){ autoSent = true; submit(); }
 }
 
 function answers(){
-  return { name: rater(), built: M.built, n_done: nDone(), n_total: M.items.length, submitted_at: new Date().toISOString(),
-           picks: M.items.filter(it => done(it.id)).map(it => ({ situation: it.id, best: R[it.id].best, note: R[it.id].note || "", at: R[it.id].at || "" })) };
+  return { name: rater(), study: STUDY, built: M.built, n_done: nDone(), n_total: M.items.length, submitted_at: new Date().toISOString(),
+           picks: M.items.filter(it => done(it.id)).map(it => { const r = R[key(it.id)]; return { situation: it.id, best: r.best, note: r.note || "", at: r.at || "" }; }) };
 }
 async function submit(){
   if (needName()) return;
@@ -174,11 +206,11 @@ async function submit(){
   $("#submit").disabled = true; status("Sending…");
   try {
     const res = await fetch(SUBMIT_URL, { method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" },
-      body: JSON.stringify({ name: a.name, n_done: a.n_done, n_total: a.n_total, submitted_at: a.submitted_at, built: a.built,
-                             picks: JSON.stringify(a.picks), _subject: `strategy study: ${a.name} ${a.n_done}/${a.n_total}` }) });
+      body: JSON.stringify({ name: a.name, study: a.study, n_done: a.n_done, n_total: a.n_total, submitted_at: a.submitted_at, built: a.built,
+                             picks: JSON.stringify(a.picks), _subject: `pair study: ${a.name} ${a.n_done}/${a.n_total}` }) });
     const j = await res.json().catch(() => ({}));
     if (res.ok && j.ok !== false){
-      status(`Submitted ${a.n_done} of ${a.n_total} picks as ${a.name}. Thank you!`, false);
+      status(`Submitted ${a.n_done} of ${a.n_total} answers as ${a.name}. Thank you!`, false);
       try { localStorage.setItem(LS() + "::submitted", a.submitted_at); } catch (e) {}
     } else {
       const why = j.errors ? j.errors.map(e => e.message).join("; ") : `HTTP ${res.status}`;
@@ -194,7 +226,7 @@ function buildCards(){
     const card = el("div", { class: "card", "data-l": v.letter });
     const vid = el("video", { muted: "", loop: "", playsinline: "", preload: "auto", controls: "" });
     vid.muted = true; vid.defaultMuted = true; vid.autoplay = true; vid.src = v.src;
-    const b = el("button", { class: "pickbtn", "data-l": v.letter }, [`${v.letter} is the best play`]);
+    const b = el("button", { class: "pickbtn", "data-l": v.letter }, [`${v.letter} is the better play`]);
     b.onclick = () => setBest(v.letter);
     card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])]), vid, b);
     host.append(card);
@@ -217,12 +249,12 @@ function playAll(){
 document.addEventListener("visibilitychange", () => { if (!document.hidden) for (const v of document.querySelectorAll("#cards video")) v.play().catch(()=>{}); });
 
 function draw(){
-  const it = cur(), r = R[it.id] || { best: null, note: "" };
+  const it = cur(), r = R[key(it.id)] || { best: null, note: "" };
   $("#sub").textContent = `situation ${i + 1}`;
   $("#count").textContent = `${i + 1} / ${M.items.length}`;
   const nd = nDone();
   $("#prog").style.width = (100 * nd / M.items.length) + "%";
-  $("#saved").textContent = rater() ? `kept ${nd}/${M.items.length}` : "name needed";
+  $("#saved").textContent = rater() ? `${SERVER ? "saved" : "kept"} ${nd}/${M.items.length}` : "name needed";
   $("#first").src = it.first;
   document.querySelectorAll("#cards .card").forEach(card => {
     const L = card.dataset.l; card.classList.toggle("best", r.best === L);
@@ -254,15 +286,16 @@ function nextUnjudged(){
     const n = (i + k) % M.items.length;
     if (!done(M.items[n].id)){ if (dirty) save(); i = n; buildCards(); draw(); return; }
   }
-  status("You have judged every situation. Press Submit my answers if you have not yet. Thank you!", false);
+  status(SERVER ? "You have judged every situation. Thank you!" : "You have judged every situation. Press Submit my answers if you have not yet. Thank you!", false);
 }
 
 document.addEventListener("keydown", e => {
   const t = e.target; if (t && (t.tagName === "TEXTAREA" || t.tagName === "INPUT")) return;
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   const k = e.key.toLowerCase();
-  if (LETTERS.map(x => x.toLowerCase()).includes(k)) { e.preventDefault(); setBest(k.toUpperCase()); return; }
-  if ("1234".includes(k) && k) { e.preventDefault(); setBest(LETTERS[Number(k) - 1]); return; }
+  if (k === "a" || k === "1") { e.preventDefault(); setBest("A"); return; }
+  if (k === "b" || k === "2") { e.preventDefault(); setBest("B"); return; }
+  if (k === "n" || k === "0") { e.preventDefault(); setBest(TIE); return; }
   if (k === " ") { e.preventDefault(); playAll(); return; }
   if (k === "arrowright") { e.preventDefault(); go(1); return; }
   if (k === "arrowleft") { e.preventDefault(); go(-1); return; }
@@ -273,29 +306,40 @@ function download(name, text, type){
   const a = el("a", { href: URL.createObjectURL(new Blob([text], { type })), download: name });
   document.body.append(a); a.click(); a.remove();
 }
+function csv(){
+  const rows = [["reviewer", "situation", "better", "note", "at"]];
+  for (const [k, v] of Object.entries(mine())) rows.push([rater(), k.split("::")[1], v.best, (v.note || "").replace(/\s+/g, " "), v.at || ""]);
+  return rows.map(r => r.map(x => `"${String(x ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+}
 
 (async function init(){
   M = await (await fetch("manifest.json")).json();
   $("#ntotal").textContent = M.items.length;
-  try { $("#rater").value = localStorage.getItem("strategy_choice_public_rater") || ""; } catch (e) {}
+  try { $("#rater").value = localStorage.getItem("strategy_pair_rater") || ""; } catch (e) {}
   load();
   const bestHost = $("#best");
-  for (const L of LETTERS){ const b = el("button", { "data-l": L, title: `${L} is the best play` }, [L]); b.onclick = () => setBest(L); bestHost.append(b); }
+  for (const [L, label] of [["A", "A is better"], [TIE, "No preference"], ["B", "B is better"]]){
+    const b = el("button", { "data-l": L, title: label }, [label]); b.onclick = () => setBest(L); bestHost.append(b); }
   buildGrid();
-  $("#rater").oninput = () => { try { localStorage.setItem("strategy_choice_public_rater", rater()); } catch (e) {}
+  $("#rater").oninput = () => { try { localStorage.setItem("strategy_pair_rater", rater()); } catch (e) {}
     load(); if (rater()) { $("#who").classList.remove("missing"); status(""); } draw(); };
   $("#prev").onclick = () => go(-1);
   $("#next").onclick = () => go(1);
   $("#skip").onclick = nextUnjudged;
   $("#replay").onclick = playAll;
-  $("#submit").onclick = submit;
-  $("#json").onclick = () => { if (needName()) return; download(`strategy_choice_${rater()}.json`, JSON.stringify(answers(), null, 1), "application/json"); };
+  if (SERVER){
+    $("#csv").onclick = () => { if (needName()) return; download(`strategy_pair_${rater()}.csv`, csv(), "text/csv"); };
+    await poll(); setInterval(poll, 20000);
+  } else {
+    $("#submit").onclick = submit;
+    $("#json").onclick = () => { if (needName()) return; download(`strategy_pair_${rater()}.json`, JSON.stringify(answers(), null, 1), "application/json"); };
+  }
   $("#note").oninput = () => { if (needName()) return; rec().note = $("#note").value; dirty = true; };
   $("#note").onblur = () => { if (dirty) save(); };
   window.addEventListener("beforeunload", () => { if (dirty) save(); });
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
   buildCards(); draw();
-  if (!rater()) needName(); else status(`${M.items.length} situations · 4 continuations each, same starting moment`);
+  if (!rater()) needName(); else status(`${M.items.length} situations · 2 continuations each, same starting moment, both end at the shot`);
 })();
 </script></body></html>

@@ -1,7 +1,7 @@
 {
- "built": "2026-10-28",
+ "built": "2026-11-03",
  "sport": "soccer",
- "task": "pick the best play among four continuations of the same moment",
+ "task": "pick the better of two continuations of the same moment, or no preference",
  "items": [
   {
    "id": "s001",
@@ -14,14 +14,6 @@
     {
      "letter": "B",
      "src": "videos/s001_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s001_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s001_D.mp4"
     }
    ]
   },
@@ -36,14 +28,6 @@
     {
      "letter": "B",
      "src": "videos/s002_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s002_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s002_D.mp4"
     }
    ]
   },
@@ -58,14 +42,6 @@
     {
      "letter": "B",
      "src": "videos/s003_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s003_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s003_D.mp4"
     }
    ]
   },
@@ -80,14 +56,6 @@
     {
      "letter": "B",
      "src": "videos/s004_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s004_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s004_D.mp4"
     }
    ]
   },
@@ -102,14 +70,6 @@
     {
      "letter": "B",
      "src": "videos/s005_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s005_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s005_D.mp4"
     }
    ]
   },
@@ -124,14 +84,6 @@
     {
      "letter": "B",
      "src": "videos/s006_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s006_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s006_D.mp4"
     }
    ]
   },
@@ -146,14 +98,6 @@
     {
      "letter": "B",
      "src": "videos/s007_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s007_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s007_D.mp4"
     }
    ]
   },
@@ -168,14 +112,6 @@
     {
      "letter": "B",
      "src": "videos/s008_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s008_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s008_D.mp4"
     }
    ]
   },
@@ -190,14 +126,6 @@
     {
      "letter": "B",
      "src": "videos/s009_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s009_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s009_D.mp4"
     }
    ]
   },
@@ -212,14 +140,6 @@
     {
      "letter": "B",
      "src": "videos/s010_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s010_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s010_D.mp4"
     }
    ]
   },
@@ -234,14 +154,6 @@
     {
      "letter": "B",
      "src": "videos/s011_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s011_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s011_D.mp4"
     }
    ]
   },
@@ -256,14 +168,6 @@
     {
      "letter": "B",
      "src": "videos/s012_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s012_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s012_D.mp4"
     }
    ]
   },
@@ -278,14 +182,6 @@
     {
      "letter": "B",
      "src": "videos/s013_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s013_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s013_D.mp4"
     }
    ]
   },
@@ -300,14 +196,6 @@
     {
      "letter": "B",
      "src": "videos/s014_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s014_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s014_D.mp4"
     }
    ]
   },
@@ -322,14 +210,6 @@
     {
      "letter": "B",
      "src": "videos/s015_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s015_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s015_D.mp4"
     }
    ]
   },
@@ -344,14 +224,6 @@
     {
      "letter": "B",
      "src": "videos/s016_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s016_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s016_D.mp4"
     }
    ]
   },
@@ -366,14 +238,6 @@
     {
      "letter": "B",
      "src": "videos/s017_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s017_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s017_D.mp4"
     }
    ]
   },
@@ -388,14 +252,6 @@
     {
      "letter": "B",
      "src": "videos/s018_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s018_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s018_D.mp4"
     }
    ]
   },
@@ -410,14 +266,6 @@
     {
      "letter": "B",
      "src": "videos/s019_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s019_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s019_D.mp4"
     }
    ]
   },
@@ -432,14 +280,6 @@
     {
      "letter": "B",
      "src": "videos/s020_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s020_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s020_D.mp4"
     }
    ]
   },
@@ -454,14 +294,6 @@
     {
      "letter": "B",
      "src": "videos/s021_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s021_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s021_D.mp4"
     }
    ]
   },
@@ -476,14 +308,6 @@
     {
      "letter": "B",
      "src": "videos/s022_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s022_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s022_D.mp4"
     }
    ]
   },
@@ -498,14 +322,6 @@
     {
      "letter": "B",
      "src": "videos/s023_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s023_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s023_D.mp4"
     }
    ]
   },
@@ -520,14 +336,6 @@
     {
      "letter": "B",
      "src": "videos/s024_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s024_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s024_D.mp4"
     }
    ]
   },
@@ -542,14 +350,6 @@
     {
      "letter": "B",
      "src": "videos/s025_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s025_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s025_D.mp4"
     }
    ]
   },
@@ -564,14 +364,6 @@
     {
      "letter": "B",
      "src": "videos/s026_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s026_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s026_D.mp4"
     }
    ]
   },
@@ -586,14 +378,6 @@
     {
      "letter": "B",
      "src": "videos/s027_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s027_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s027_D.mp4"
     }
    ]
   },
@@ -608,14 +392,6 @@
     {
      "letter": "B",
      "src": "videos/s028_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s028_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s028_D.mp4"
     }
    ]
   },
@@ -630,14 +406,6 @@
     {
      "letter": "B",
      "src": "videos/s029_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s029_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s029_D.mp4"
     }
    ]
   },
@@ -652,14 +420,6 @@
     {
      "letter": "B",
      "src": "videos/s030_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s030_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s030_D.mp4"
     }
    ]
   },
@@ -674,14 +434,6 @@
     {
      "letter": "B",
      "src": "videos/s031_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s031_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s031_D.mp4"
     }
    ]
   },
@@ -696,14 +448,6 @@
     {
      "letter": "B",
      "src": "videos/s032_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s032_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s032_D.mp4"
     }
    ]
   },
@@ -718,14 +462,6 @@
     {
      "letter": "B",
      "src": "videos/s033_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s033_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s033_D.mp4"
     }
    ]
   },
@@ -740,14 +476,6 @@
     {
      "letter": "B",
      "src": "videos/s034_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s034_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s034_D.mp4"
     }
    ]
   },
@@ -762,14 +490,6 @@
     {
      "letter": "B",
      "src": "videos/s035_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s035_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s035_D.mp4"
     }
    ]
   },
@@ -784,14 +504,6 @@
     {
      "letter": "B",
      "src": "videos/s036_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s036_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s036_D.mp4"
     }
    ]
   },
@@ -806,14 +518,6 @@
     {
      "letter": "B",
      "src": "videos/s037_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s037_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s037_D.mp4"
     }
    ]
   },
@@ -828,14 +532,6 @@
     {
      "letter": "B",
      "src": "videos/s038_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s038_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s038_D.mp4"
     }
    ]
   },
@@ -850,14 +546,6 @@
     {
      "letter": "B",
      "src": "videos/s039_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s039_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s039_D.mp4"
     }
    ]
   },
@@ -872,14 +560,6 @@
     {
      "letter": "B",
      "src": "videos/s040_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s040_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s040_D.mp4"
     }
    ]
   },
@@ -894,14 +574,6 @@
     {
      "letter": "B",
      "src": "videos/s041_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s041_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s041_D.mp4"
     }
    ]
   },
@@ -916,14 +588,6 @@
     {
      "letter": "B",
      "src": "videos/s042_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s042_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s042_D.mp4"
     }
    ]
   },
@@ -938,14 +602,6 @@
     {
      "letter": "B",
      "src": "videos/s043_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s043_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s043_D.mp4"
     }
    ]
   },
@@ -960,14 +616,6 @@
     {
      "letter": "B",
      "src": "videos/s044_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s044_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s044_D.mp4"
     }
    ]
   },
@@ -982,14 +630,6 @@
     {
      "letter": "B",
      "src": "videos/s045_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s045_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s045_D.mp4"
     }
    ]
   },
@@ -1004,14 +644,6 @@
     {
      "letter": "B",
      "src": "videos/s046_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s046_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s046_D.mp4"
     }
    ]
   },
@@ -1026,14 +658,6 @@
     {
      "letter": "B",
      "src": "videos/s047_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s047_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s047_D.mp4"
     }
    ]
   },
@@ -1048,14 +672,6 @@
     {
      "letter": "B",
      "src": "videos/s048_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s048_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s048_D.mp4"
     }
    ]
   },
@@ -1070,14 +686,6 @@
     {
      "letter": "B",
      "src": "videos/s049_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s049_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s049_D.mp4"
     }
    ]
   },
@@ -1092,14 +700,6 @@
     {
      "letter": "B",
      "src": "videos/s050_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s050_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s050_D.mp4"
     }
    ]
   },
@@ -1114,14 +714,6 @@
     {
      "letter": "B",
      "src": "videos/s051_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s051_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s051_D.mp4"
     }
    ]
   },
@@ -1136,14 +728,6 @@
     {
      "letter": "B",
      "src": "videos/s052_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s052_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s052_D.mp4"
     }
    ]
   },
@@ -1158,14 +742,6 @@
     {
      "letter": "B",
      "src": "videos/s053_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s053_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s053_D.mp4"
     }
    ]
   },
@@ -1180,14 +756,6 @@
     {
      "letter": "B",
      "src": "videos/s054_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s054_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s054_D.mp4"
     }
    ]
   },
@@ -1202,14 +770,6 @@
     {
      "letter": "B",
      "src": "videos/s055_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s055_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s055_D.mp4"
     }
    ]
   },
@@ -1224,14 +784,6 @@
     {
      "letter": "B",
      "src": "videos/s056_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s056_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s056_D.mp4"
     }
    ]
   },
@@ -1246,14 +798,6 @@
     {
      "letter": "B",
      "src": "videos/s057_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s057_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s057_D.mp4"
     }
    ]
   },
@@ -1268,14 +812,6 @@
     {
      "letter": "B",
      "src": "videos/s058_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s058_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s058_D.mp4"
     }
    ]
   },
@@ -1290,14 +826,6 @@
     {
      "letter": "B",
      "src": "videos/s059_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s059_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s059_D.mp4"
     }
    ]
   },
@@ -1312,14 +840,6 @@
     {
      "letter": "B",
      "src": "videos/s060_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s060_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s060_D.mp4"
     }
    ]
   },
@@ -1334,14 +854,6 @@
     {
      "letter": "B",
      "src": "videos/s061_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s061_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s061_D.mp4"
     }
    ]
   },
@@ -1356,14 +868,6 @@
     {
      "letter": "B",
      "src": "videos/s062_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s062_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s062_D.mp4"
     }
    ]
   },
@@ -1378,14 +882,6 @@
     {
      "letter": "B",
      "src": "videos/s063_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s063_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s063_D.mp4"
     }
    ]
   },
@@ -1400,14 +896,6 @@
     {
      "letter": "B",
      "src": "videos/s064_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s064_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s064_D.mp4"
     }
    ]
   },
@@ -1422,14 +910,6 @@
     {
      "letter": "B",
      "src": "videos/s065_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s065_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s065_D.mp4"
     }
    ]
   },
@@ -1444,14 +924,6 @@
     {
      "letter": "B",
      "src": "videos/s066_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s066_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s066_D.mp4"
     }
    ]
   },
@@ -1466,14 +938,6 @@
     {
      "letter": "B",
      "src": "videos/s067_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s067_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s067_D.mp4"
     }
    ]
   },
@@ -1488,14 +952,6 @@
     {
      "letter": "B",
      "src": "videos/s068_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s068_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s068_D.mp4"
     }
    ]
   },
@@ -1510,14 +966,6 @@
     {
      "letter": "B",
      "src": "videos/s069_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s069_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s069_D.mp4"
     }
    ]
   },
@@ -1532,14 +980,6 @@
     {
      "letter": "B",
      "src": "videos/s070_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s070_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s070_D.mp4"
     }
    ]
   },
@@ -1554,14 +994,6 @@
     {
      "letter": "B",
      "src": "videos/s071_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s071_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s071_D.mp4"
     }
    ]
   },
@@ -1576,14 +1008,6 @@
     {
      "letter": "B",
      "src": "videos/s072_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s072_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s072_D.mp4"
     }
    ]
   },
@@ -1598,14 +1022,6 @@
     {
      "letter": "B",
      "src": "videos/s073_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s073_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s073_D.mp4"
     }
    ]
   },
@@ -1620,14 +1036,6 @@
     {
      "letter": "B",
      "src": "videos/s074_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s074_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s074_D.mp4"
     }
    ]
   },
@@ -1642,14 +1050,6 @@
     {
      "letter": "B",
      "src": "videos/s075_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s075_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s075_D.mp4"
     }
    ]
   },
@@ -1664,14 +1064,6 @@
     {
      "letter": "B",
      "src": "videos/s076_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s076_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s076_D.mp4"
     }
    ]
   },
@@ -1686,14 +1078,6 @@
     {
      "letter": "B",
      "src": "videos/s077_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s077_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s077_D.mp4"
     }
    ]
   },
@@ -1708,14 +1092,6 @@
     {
      "letter": "B",
      "src": "videos/s078_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s078_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s078_D.mp4"
     }
    ]
   },
@@ -1730,14 +1106,6 @@
     {
      "letter": "B",
      "src": "videos/s079_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s079_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s079_D.mp4"
     }
    ]
   },
@@ -1752,14 +1120,6 @@
     {
      "letter": "B",
      "src": "videos/s080_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s080_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s080_D.mp4"
     }
    ]
   },
@@ -1774,14 +1134,6 @@
     {
      "letter": "B",
      "src": "videos/s081_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s081_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s081_D.mp4"
     }
    ]
   },
@@ -1796,14 +1148,6 @@
     {
      "letter": "B",
      "src": "videos/s082_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s082_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s082_D.mp4"
     }
    ]
   },
@@ -1818,14 +1162,6 @@
     {
      "letter": "B",
      "src": "videos/s083_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s083_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s083_D.mp4"
     }
    ]
   },
@@ -1840,14 +1176,6 @@
     {
      "letter": "B",
      "src": "videos/s084_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s084_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s084_D.mp4"
     }
    ]
   },
@@ -1862,14 +1190,6 @@
     {
      "letter": "B",
      "src": "videos/s085_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s085_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s085_D.mp4"
     }
    ]
   },
@@ -1884,14 +1204,6 @@
     {
      "letter": "B",
      "src": "videos/s086_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s086_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s086_D.mp4"
     }
    ]
   },
@@ -1906,14 +1218,6 @@
     {
      "letter": "B",
      "src": "videos/s087_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s087_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s087_D.mp4"
     }
    ]
   },
@@ -1928,14 +1232,6 @@
     {
      "letter": "B",
      "src": "videos/s088_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s088_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s088_D.mp4"
     }
    ]
   },
@@ -1950,14 +1246,6 @@
     {
      "letter": "B",
      "src": "videos/s089_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s089_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s089_D.mp4"
     }
    ]
   },
@@ -1972,14 +1260,6 @@
     {
      "letter": "B",
      "src": "videos/s090_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s090_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s090_D.mp4"
     }
    ]
   },
@@ -1994,14 +1274,6 @@
     {
      "letter": "B",
      "src": "videos/s091_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s091_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s091_D.mp4"
     }
    ]
   },
@@ -2016,14 +1288,6 @@
     {
      "letter": "B",
      "src": "videos/s092_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s092_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s092_D.mp4"
     }
    ]
   },
@@ -2038,14 +1302,6 @@
     {
      "letter": "B",
      "src": "videos/s093_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s093_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s093_D.mp4"
     }
    ]
   },
@@ -2060,14 +1316,6 @@
     {
      "letter": "B",
      "src": "videos/s094_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s094_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s094_D.mp4"
     }
    ]
   },
@@ -2082,14 +1330,6 @@
     {
      "letter": "B",
      "src": "videos/s095_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s095_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s095_D.mp4"
     }
    ]
   },
@@ -2104,14 +1344,6 @@
     {
      "letter": "B",
      "src": "videos/s096_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s096_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s096_D.mp4"
     }
    ]
   },
@@ -2126,14 +1358,6 @@
     {
      "letter": "B",
      "src": "videos/s097_B.mp4"
-    },
-    {
-     "letter": "C",
-     "src": "videos/s097_C.mp4"
-    },
-    {
-     "letter": "D",
-     "src": "videos/s097_D.mp4"
     }
    ]
   }
