@@ -26,8 +26,7 @@ h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
 .layout{display:flex;flex-direction:column;gap:1rem}
 .side{display:flex;flex-direction:column;gap:.7rem}
-.answer{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:.8rem;align-items:start}
-@media (max-width:900px){.answer{grid-template-columns:1fr}}
+.answer{display:flex;flex-direction:column;gap:.6rem}
 .cards{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:.8rem}
 .cards.one{max-width:1200px;margin:0 auto}
 @media (max-width:800px){.cards{grid-template-columns:1fr}}
@@ -55,7 +54,7 @@ legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transf
 .bestrow.five button:nth-child(-n+2){grid-column:span 3}
 .bestrow.five button:nth-child(n+3){grid-column:span 2}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
-textarea{min-height:4.5rem;resize:vertical;margin-top:0}
+textarea{min-height:3.2rem;resize:vertical;margin-top:0}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
 .nav button{padding:.38rem .6rem;font-size:.86rem}
 .nav .spacer{flex:1}
@@ -85,7 +84,7 @@ body.mode-public .wrap .tabs{display:flex}
 <nav class="tabs"><a href="../">1 · Better play</a><a href="../realism/" class="cur">2 · Realism</a><a href="../value/">3 · Shot value</a></nav>
 <header>
   <div class="meta" id="sub">loading…</div>
-  <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
+  <div class="who" id="who"><label for="rater">Please enter your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
@@ -317,7 +316,7 @@ function csv(){
   try { $("#rater").value = localStorage.getItem("video_gen_review_rater") || ""; } catch (e) {}
   load();
   const bestHost = $("#best");
-  for (const [L, label] of OPTIONS){ const b = el("button", { "data-l": L, title: label }, [label]); b.onclick = () => setBest(L); bestHost.append(b); }
+  for (const [L, label] of OPTIONS){ const b = el("button", { "data-l": L }, [label]); b.onclick = () => setBest(L); bestHost.append(b); }
   buildGrid();
   $("#rater").oninput = () => { try { localStorage.setItem("video_gen_review_rater", rater()); } catch (e) {}
     load(); if (rater()) { $("#who").classList.remove("missing"); status(""); } draw(); };
