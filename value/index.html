@@ -241,6 +241,7 @@ function buildCards(){
 // card that is playing is marked; "Play again" / Space restarts the sequence. The native controls still play a single clip.
 let armed = false, seqId = 0;
 function playAll(){
+  if ($("#namebox").classList.contains("open")) return;          // not before the name is in; the dialog's Start restarts the clips
   const vids = [...document.querySelectorAll("#cards video")]; const my = ++seqId;
   vids.forEach(v => { v.pause(); v.onended = null; v.currentTime = 0; });
   const mark = k => document.querySelectorAll("#cards .card").forEach((c, j) => c.classList.toggle("playing", j === k));
