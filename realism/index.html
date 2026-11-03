@@ -73,6 +73,11 @@ kbd{font:600 .74rem/1 ui-monospace,monospace;border:1px solid var(--rule);border
 .intro{background:var(--surface);border-left:5px solid var(--accent);padding:.6rem .9rem;border-radius:4px;font-size:.9rem}
 .intro p{margin:.2rem 0}
 button.primary{background:var(--pick);color:#fff;border-color:transparent;font-weight:600}
+.modal{position:fixed;inset:0;background:rgba(10,14,15,.55);display:none;place-items:center;z-index:50}
+.modal.open{display:grid}
+.modal .box{background:var(--surface);color:var(--ink);border-radius:6px;padding:1.3rem 1.5rem;width:min(26rem,92vw);display:flex;flex-direction:column;gap:.8rem;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.modal h2{margin:0;font-size:1.05rem}
+.modal input{font-size:1.05rem;padding:.55rem .7rem}
 /* mode marker on <body> is 'mode-public' (never 'public': body.public would match .public and hide itself) */
 .wrap .public{display:none}
 body.mode-public .wrap .public{display:block}
@@ -80,6 +85,11 @@ body.mode-public .wrap .server{display:none}
 .wrap .tabs{display:none}
 body.mode-public .wrap .tabs{display:flex}
 </style></head><body>
+<div class="modal" id="namebox"><form class="box" id="nameform">
+  <h2>Please enter your name</h2>
+  <input id="rater2" type="text" placeholder="first name" autocomplete="off" autofocus>
+  <button class="primary" type="submit">Start</button>
+</form></div>
 <div class="wrap">
 <nav class="tabs"><a href="../">1 · Better play</a><a href="../realism/" class="cur">2 · Realism</a><a href="../value/">3 · Shot value</a></nav>
 <header>
@@ -177,11 +187,10 @@ async function poll(){
   if (!SERVER) return;
   try { const s = await (await fetch("choices.json", { cache: "no-store" })).json(); adopt(s.ratings || {}); } catch (e) {}
 }
+function askName(){ $("#namebox").classList.add("open"); $("#rater2").value = rater(); setTimeout(() => $("#rater2").focus(), 50); }
 function needName(){
   if (rater()) return false;
-  $("#who").classList.add("missing"); $("#rater").focus();
-  status("Type your name first.", true);
-  return true;
+  askName(); return true;
 }
 function setBest(L){
   if (needName()) return;
@@ -334,9 +343,12 @@ function csv(){
   $("#note").oninput = () => { if (needName()) return; rec().note = $("#note").value; dirty = true; };
   $("#note").onblur = () => { if (dirty) save(); };
   window.addEventListener("beforeunload", () => { if (dirty) save(); });
+  $("#nameform").onsubmit = e => { e.preventDefault(); const v = ($("#rater2").value || "").trim(); if (!v) return;
+    $("#rater").value = v; $("#rater").oninput(); $("#namebox").classList.remove("open"); $("#who").classList.remove("missing"); status("");
+    const f = M.items.findIndex(x => !done(x.id)); i = f < 0 ? 0 : f; buildCards(); draw(); };
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
   buildCards(); draw();
-  if (!rater()) needName();
+  if (!rater()) askName();
 })();
 </script></body></html>
