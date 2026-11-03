@@ -17,6 +17,8 @@ body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 ui-sans-ser
 .tabs a{text-decoration:none;color:var(--muted);font:600 .82rem/1 ui-monospace,monospace;letter-spacing:.04em;padding:.5rem .8rem;border:1px solid var(--rule-soft);border-bottom:none;border-radius:4px 4px 0 0;background:var(--surface)}
 .tabs a.cur{color:var(--accent);border-color:var(--accent);background:var(--accent-wash)}
 header{display:flex;flex-wrap:wrap;gap:.5rem 1.4rem;align-items:center;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:.6rem}
+header .who{gap:.9rem}
+#replay{padding:.5rem 1rem;font-size:.95rem}
 h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .meta{font:500 .78rem/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);letter-spacing:.03em}
 .who{display:flex;align-items:center;gap:.5rem;font-size:.86rem}
@@ -95,7 +97,7 @@ body.mode-public .wrap .tabs{display:flex}
 <header>
   <div class="meta" id="sub">loading…</div>
   <div class="who" id="who"><label for="rater">Please enter your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
-  <div class="meta" id="count"></div>
+  <div class="who"><button id="replay" class="primary">&#9654; Play again</button><span class="meta" id="count"></span></div>
 </header>
 <div class="bar"><i id="prog"></i></div>
 
@@ -115,7 +117,6 @@ body.mode-public .wrap .tabs{display:flex}
   <button id="prev">&larr; Previous</button>
   <button id="next">Next &rarr;</button>
   <button id="skip">Next unjudged</button>
-  <button id="replay">Play again</button>
   <span class="spacer"></span>
   <span class="pill" id="saved">…</span>
 </div>
