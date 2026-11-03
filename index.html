@@ -349,7 +349,7 @@ function csv(){
     const f = M.items.findIndex(x => !done(x.id)); i = f < 0 ? 0 : f; buildCards(); draw(); };
   const first = rater() ? M.items.findIndex(x => !done(x.id)) : 0;
   i = first < 0 ? 0 : first;
+  if (!rater()) askName();                      // open the dialog BEFORE the clips are built, so they wait for the name
   buildCards(); draw();
-  if (!rater()) askName();
 })();
 </script></body></html>
