@@ -24,11 +24,12 @@ h1{margin:0;font-size:1.15rem;letter-spacing:-.01em}
 .who.missing input{border-color:var(--warn);box-shadow:0 0 0 2px color-mix(in srgb,var(--warn) 30%,transparent)}
 .bar{height:5px;background:var(--rule-soft);border-radius:3px;overflow:hidden}
 .bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .2s}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:1rem;align-items:start}
-.side{position:sticky;top:.75rem;max-height:calc(100vh - 1.5rem);overflow:auto;display:flex;flex-direction:column;gap:.7rem;padding-right:.2rem}
-@media (max-width:1100px){.layout{grid-template-columns:1fr}.side{position:static;max-height:none}}
+.layout{display:flex;flex-direction:column;gap:1rem}
+.side{display:flex;flex-direction:column;gap:.7rem}
+.answer{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:.8rem;align-items:start}
+@media (max-width:900px){.answer{grid-template-columns:1fr}}
 .cards{display:grid;grid-template-columns:repeat(1,minmax(0,1fr));gap:.8rem}
-.cards.one{max-width:960px}
+.cards.one{max-width:1200px;margin:0 auto}
 @media (max-width:800px){.cards{grid-template-columns:1fr}}
 .card{background:var(--surface);border:1px solid var(--rule-soft);border-radius:5px;padding:.45rem;display:flex;flex-direction:column;gap:.4rem;min-width:0;border-left:5px solid var(--rule-soft)}
 .card.best{border-left-color:var(--pick);outline:2px solid var(--pick);outline-offset:1px}
@@ -46,15 +47,15 @@ button:disabled{opacity:.45;cursor:not-allowed}
 fieldset{border:1px solid var(--rule-soft);background:var(--surface);border-radius:4px;margin:0;padding:.75rem .9rem}
 legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--accent);padding:0 .3rem}
 .first{width:100%;border-radius:3px;display:block;background:var(--video)}
-.task p{margin:.45rem 0 0;font-size:.88rem}
-.task p.key{font-weight:600}
-.bestrow{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.task p{margin:0}
+.task p.key{font-weight:600;font-size:1.05rem}
+.bestrow{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:.6rem}
 .bestrow button{font:700 .84rem/1.2 ui-monospace,monospace;padding:.6rem .2rem}
 .bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
 .bestrow.five button:nth-child(-n+2){grid-column:span 3}
 .bestrow.five button:nth-child(n+3){grid-column:span 2}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
-textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
+textarea{min-height:4.5rem;resize:vertical;margin-top:0}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
 .nav button{padding:.38rem .6rem;font-size:.86rem}
 .nav .spacer{flex:1}
@@ -83,7 +84,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="wrap">
 <nav class="tabs"><a href="../">1 · Better play</a><a href="../realism/" class="cur">2 · Realism</a><a href="../value/">3 · Shot value</a></nav>
 <header>
-  <div><h1>Could this sequence of player and ball movements plausibly occur in a competitive game?</h1><div class="meta" id="sub">loading…</div></div>
+  <div class="meta" id="sub">loading…</div>
   <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
@@ -93,17 +94,13 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="main"><div class="cards one" id="cards"></div></div>
 
 <aside class="side">
+<div class="answer">
 <fieldset class="task">
-  <legend>The question</legend>
-  
   <p class="key">Could this sequence of player and ball movements plausibly occur in a competitive game?</p>
-</fieldset>
-
-<fieldset>
-  <legend>Your answer</legend>
   <div class="bestrow " id="best"></div>
-  <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
 </fieldset>
+<textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
+</div>
 
 <div class="nav">
   <button id="prev">&larr; Previous</button>
@@ -228,10 +225,6 @@ function buildCards(){
     vid.muted = true; vid.defaultMuted = true; vid.src = v.src;
     if (v.letter) card.append(el("div", { class: "top" }, [el("div", { class: "badge" }, [v.letter])]));
     card.append(vid);
-    if (CARD_BTN && v.letter && OPTIONS.some(o => o[0] === v.letter)){
-      const b = el("button", { class: "pickbtn", "data-l": v.letter }, [CARD_BTN.replace("{L}", v.letter)]);
-      b.onclick = () => setBest(v.letter); card.append(b);
-    }
     host.append(card);
   });
   playAll();
@@ -266,10 +259,8 @@ function draw(){
   const nd = nDone();
   $("#prog").style.width = (100 * nd / M.items.length) + "%";
   $("#saved").textContent = rater() ? `${SERVER ? "saved" : "kept"} ${nd}/${M.items.length}` : "name needed";
-  if ($("#first") && it.first) $("#first").src = it.first;
   document.querySelectorAll("#cards .card").forEach(card => {
     const L = card.dataset.l; card.classList.toggle("best", !!L && r.best === L);
-    const b = card.querySelector(".pickbtn"); if (b) b.setAttribute("aria-pressed", String(r.best === L));
   });
   document.querySelectorAll("#best button").forEach(b => b.setAttribute("aria-pressed", String(r.best === b.dataset.l)));
   if (document.activeElement !== $("#note")) $("#note").value = r.note || "";
