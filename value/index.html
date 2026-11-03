@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Which shot is more likely to score?</title>
+<title>Which shot has the higher scoring probability?</title>
 <style>
 :root{
   --paper:#F1F4F4; --surface:#fff; --ink:#14191a; --muted:#58696c; --rule:#c9d6d7; --rule-soft:#e1eaea;
@@ -46,9 +46,11 @@ legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transf
 .first{width:100%;border-radius:3px;display:block;background:var(--video)}
 .task p{margin:.45rem 0 0;font-size:.88rem}
 .task p.key{font-weight:600}
-.bestrow{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:.4rem}
+.bestrow{display:grid;grid-template-columns:1fr 1fr 1.6fr 1.6fr;gap:.4rem}
 .bestrow button{font:700 .84rem/1.2 ui-monospace,monospace;padding:.6rem .2rem}
 .bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
+.bestrow.five button:nth-child(-n+2){grid-column:span 3}
+.bestrow.five button:nth-child(n+3){grid-column:span 2}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
 textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
@@ -79,7 +81,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="wrap">
 <nav class="tabs"><a href="../">1 · Better play</a><a href="../realism/">2 · Realism</a><a href="../value/" class="cur">3 · Shot value</a></nav>
 <header>
-  <div><h1>Which shot is more likely to score?</h1><div class="meta" id="sub">loading…</div></div>
+  <div><h1>Which shot has the higher scoring probability?</h1><div class="meta" id="sub">loading…</div></div>
   <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
@@ -97,7 +99,7 @@ body.mode-public .wrap .tabs{display:flex}
 
 <fieldset>
   <legend>Your answer</legend>
-  <div class="bestrow" id="best"></div>
+  <div class="bestrow " id="best"></div>
   <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
 </fieldset>
 
@@ -130,7 +132,7 @@ body.mode-public .wrap .tabs{display:flex}
 const SERVER = false;
 const SUBMIT_URL = "https://formspree.io/f/xqppqrdq";
 const STUDY = "value_v1";
-const OPTIONS = [["A", "A more likely"], ["comparable", "Comparable"], ["B", "B more likely"], ["cannot", "Cannot judge"]];      // [[value, label], ...]; a value equal to a card letter also puts a button under that card
+const OPTIONS = [["A", "A"], ["B", "B"], ["comparable", "Comparable"], ["cannot", "Cannot judge"]];      // [[value, label], ...]; a value equal to a card letter also puts a button under that card
 const KEYS = {"a": "A", "1": "A", "b": "B", "2": "B", "c": "comparable", "3": "comparable", "4": "cannot", "0": "cannot"};            // key -> value
 const CARD_BTN = "{L} is more likely to score";     // label template with {L}, or null
 let M = null, R = {}, i = 0, dirty = false, autoSent = false;

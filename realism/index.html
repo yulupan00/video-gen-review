@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Could this play happen in a real game?</title>
+<title>Could this sequence of player and ball movements plausibly occur in a competitive game?</title>
 <style>
 :root{
   --paper:#F1F4F4; --surface:#fff; --ink:#14191a; --muted:#58696c; --rule:#c9d6d7; --rule-soft:#e1eaea;
@@ -49,6 +49,8 @@ legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transf
 .bestrow{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
 .bestrow button{font:700 .84rem/1.2 ui-monospace,monospace;padding:.6rem .2rem}
 .bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
+.bestrow.five button:nth-child(-n+2){grid-column:span 3}
+.bestrow.five button:nth-child(n+3){grid-column:span 2}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
 textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
@@ -79,7 +81,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="wrap">
 <nav class="tabs"><a href="../">1 · Better play</a><a href="../realism/" class="cur">2 · Realism</a><a href="../value/">3 · Shot value</a></nav>
 <header>
-  <div><h1>Could this play happen in a real game?</h1><div class="meta" id="sub">loading…</div></div>
+  <div><h1>Could this sequence of player and ball movements plausibly occur in a competitive game?</h1><div class="meta" id="sub">loading…</div></div>
   <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
@@ -97,7 +99,7 @@ body.mode-public .wrap .tabs{display:flex}
 
 <fieldset>
   <legend>Your answer</legend>
-  <div class="bestrow" id="best"></div>
+  <div class="bestrow " id="best"></div>
   <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
 </fieldset>
 

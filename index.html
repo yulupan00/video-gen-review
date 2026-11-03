@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Which continuation is the better play?</title>
+<title>From this starting situation, which play would you recommend the team attempt, accounting for execution difficulty?</title>
 <style>
 :root{
   --paper:#F1F4F4; --surface:#fff; --ink:#14191a; --muted:#58696c; --rule:#c9d6d7; --rule-soft:#e1eaea;
@@ -46,9 +46,11 @@ legend{font:600 .72rem/1 ui-monospace,monospace;letter-spacing:.09em;text-transf
 .first{width:100%;border-radius:3px;display:block;background:var(--video)}
 .task p{margin:.45rem 0 0;font-size:.88rem}
 .task p.key{font-weight:600}
-.bestrow{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:.4rem}
+.bestrow{display:grid;grid-template-columns:repeat(6,1fr);gap:.4rem}
 .bestrow button{font:700 .84rem/1.2 ui-monospace,monospace;padding:.6rem .2rem}
 .bestrow button[aria-pressed="true"]{background:var(--pick);color:#fff;border-color:transparent}
+.bestrow.five button:nth-child(-n+2){grid-column:span 3}
+.bestrow.five button:nth-child(n+3){grid-column:span 2}
 textarea,input[type=text]{width:100%;font:inherit;padding:.42rem .55rem;border:1px solid var(--rule);border-radius:3px;background:var(--surface);color:var(--ink)}
 textarea{min-height:2.8rem;resize:vertical;margin-top:.45rem}
 .nav{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center}
@@ -79,7 +81,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="wrap">
 <nav class="tabs"><a href="./" class="cur">1 · Better play</a><a href="./realism/">2 · Realism</a><a href="./value/">3 · Shot value</a></nav>
 <header>
-  <div><h1>Which continuation is the better play?</h1><div class="meta" id="sub">loading…</div></div>
+  <div><h1>From this starting situation, which play would you recommend the team attempt, accounting for execution difficulty?</h1><div class="meta" id="sub">loading…</div></div>
   <div class="who" id="who"><label for="rater">Your name</label><input id="rater" type="text" placeholder="first name" autocomplete="off"></div>
   <div class="meta" id="count"></div>
 </header>
@@ -92,12 +94,12 @@ body.mode-public .wrap .tabs{display:flex}
 <fieldset class="task">
   <legend>The situation</legend>
   <img class="first" id="first" alt="the moment both clips start from">
-  <p class="key">Which continuation is the better play?</p>
+  <p class="key">From this starting situation, which play would you recommend the team attempt, accounting for execution difficulty?</p>
 </fieldset>
 
 <fieldset>
   <legend>Better play</legend>
-  <div class="bestrow" id="best"></div>
+  <div class="bestrow five" id="best"></div>
   <textarea id="note" placeholder="Why, or what made it hard (optional)"></textarea>
 </fieldset>
 
@@ -118,7 +120,7 @@ body.mode-public .wrap .tabs{display:flex}
 <div class="status" id="status"></div>
 <div class="grid" id="grid"></div>
 <details><summary>Keys</summary>
-  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) the better play · <kbd>N</kbd> or <kbd>0</kbd> no preference · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
+  <p class="hint"><kbd>A</kbd> / <kbd>B</kbd> (or <kbd>1</kbd> / <kbd>2</kbd>) recommend · <kbd>E</kbd>/<kbd>3</kbd> equally good · <kbd>N</kbd>/<kbd>4</kbd> neither · <kbd>5</kbd>/<kbd>0</kbd> cannot judge · <kbd>Space</kbd> replay · <kbd>&larr;</kbd> <kbd>&rarr;</kbd> previous / next · <kbd>S</kbd> next unjudged.</p>
 </details>
 </aside>
 </div>
@@ -130,9 +132,9 @@ body.mode-public .wrap .tabs{display:flex}
 const SERVER = false;
 const SUBMIT_URL = "https://formspree.io/f/xqppqrdq";
 const STUDY = "pair_v2";
-const OPTIONS = [["A", "A is better"], ["tie", "No preference"], ["B", "B is better"]];      // [[value, label], ...]; a value equal to a card letter also puts a button under that card
-const KEYS = {"a": "A", "1": "A", "b": "B", "2": "B", "n": "tie", "0": "tie"};            // key -> value
-const CARD_BTN = "{L} is the better play";     // label template with {L}, or null
+const OPTIONS = [["A", "A"], ["B", "B"], ["equal", "Equally good"], ["neither", "Neither"], ["cannot", "Cannot judge"]];      // [[value, label], ...]; a value equal to a card letter also puts a button under that card
+const KEYS = {"a": "A", "1": "A", "b": "B", "2": "B", "e": "equal", "3": "equal", "n": "neither", "4": "neither", "5": "cannot", "0": "cannot"};            // key -> value
+const CARD_BTN = "Recommend {L}";     // label template with {L}, or null
 let M = null, R = {}, i = 0, dirty = false, autoSent = false;
 const $ = s => document.querySelector(s);
 const el = (t, a = {}, kids = []) => { const n = document.createElement(t);
