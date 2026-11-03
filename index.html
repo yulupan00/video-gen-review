@@ -65,9 +65,10 @@ kbd{font:600 .74rem/1 ui-monospace,monospace;border:1px solid var(--rule);border
 .intro{background:var(--surface);border-left:5px solid var(--accent);padding:.6rem .9rem;border-radius:4px;font-size:.9rem}
 .intro p{margin:.2rem 0}
 button.primary{background:var(--pick);color:#fff;border-color:transparent;font-weight:600}
-.public{display:none}
-body.public .public{display:block}
-body.public .server{display:none}
+/* mode marker on <body> is 'mode-public', NOT 'public': a body.public would match .public and hide itself (the 2026-11-03 white page) */
+.wrap .public{display:none}
+body.mode-public .wrap .public{display:block}
+body.mode-public .wrap .server{display:none}
 </style></head><body>
 <div class="wrap">
 <header>
@@ -142,7 +143,7 @@ const $ = s => document.querySelector(s);
 const el = (t, a = {}, kids = []) => { const n = document.createElement(t);
   for (const [k, v] of Object.entries(a)) k === "class" ? n.className = v : n.setAttribute(k, v);
   for (const c of [].concat(kids)) n.append(c); return n; };
-if (!SERVER) document.body.classList.add("public");
+if (!SERVER) document.body.classList.add("mode-public");
 
 const rater = () => ($("#rater").value || "").trim();
 const key = sid => SERVER ? `${rater()}::${sid}` : sid;
