@@ -154,7 +154,7 @@ if (!SERVER) document.body.classList.add("mode-public");
 
 const rater = () => ($("#rater").value || "").trim();
 const key = sid => SERVER ? `${rater()}::${sid}` : sid;
-const LS = () => "realism_clips::" + rater();
+const LS = () => "realism_clips_v2::" + rater();
 function cur(){ return M.items[i]; }
 function rec(){ const k = key(cur().id); return R[k] || (R[k] = { best: null, note: "" }); }
 function done(sid){ const r = R[key(sid)]; return !!(r && r.best); }
@@ -178,7 +178,7 @@ async function save(){
     if (j.ratings) adopt(j.ratings);
     $("#saved").textContent = `saved ${nDone()}/${M.items.length}`; dirty = false;
   } catch (e) { $("#saved").textContent = "saved locally only"; }
-  try { localStorage.setItem("realism_clips_server", JSON.stringify(mine())); } catch (e) {}
+  try { localStorage.setItem("realism_clips_v2_server", JSON.stringify(mine())); } catch (e) {}
 }
 function adopt(remote){
   const keep = M ? key(cur().id) : null;
@@ -337,11 +337,11 @@ function csv(){
   $("#skip").onclick = nextUnjudged;
   $("#replay").onclick = playAll;
   if (SERVER){
-    $("#csv").onclick = () => { if (needName()) return; download(`realism_clips_${rater()}.csv`, csv(), "text/csv"); };
+    $("#csv").onclick = () => { if (needName()) return; download(`realism_clips_v2_${rater()}.csv`, csv(), "text/csv"); };
     await poll(); setInterval(poll, 20000);
   } else {
     $("#submit").onclick = submit;
-    $("#json").onclick = () => { if (needName()) return; download(`realism_clips_${rater()}.json`, JSON.stringify(answers(), null, 1), "application/json"); };
+    $("#json").onclick = () => { if (needName()) return; download(`realism_clips_v2_${rater()}.json`, JSON.stringify(answers(), null, 1), "application/json"); };
   }
   $("#note").oninput = () => { if (needName()) return; rec().note = $("#note").value; dirty = true; };
   $("#note").onblur = () => { if (dirty) save(); };
